@@ -6,9 +6,10 @@ import type { CalcDirection } from '@/types/salary'
 import { COLORS } from '@/constants/colors'
 
 import SectionCard from '@/components/shared/SectionCard.vue'
-import BaseButton  from '@/components/base/ui/BaseButton.vue'
-import BaseText    from '@/components/base/text/BaseText.vue'
-import BaseFlex    from '@/components/base/layout/BaseFlex.vue'
+import BaseButton from '@/components/base/ui/BaseButton.vue'
+import BaseText from '@/components/base/text/BaseText.vue'
+import BaseFlex from '@/components/base/layout/BaseFlex.vue'
+import { Icon } from '@iconify/vue'
 
 const store = useSalaryStore()
 
@@ -20,36 +21,32 @@ const activeMap = computed(() =>
 </script>
 
 <template>
-  <SectionCard title="Calculation Direction">
-    <div class="grid grid-cols-1 gap-3">
-      <BaseButton
-        v-for="opt in DIRECTION_OPTIONS"
-        :key="opt.value"
-        variant="card-select"
-        :active="activeMap[opt.value]"
-        @click="store.direction = opt.value as CalcDirection"
-      >
+  <div>
+    <BaseText class="mb-2" variant="sub-hint" color="CONTENT">
+      Հաշվարկի նպատակը
+    </BaseText>
+    <div class="flex flex-col gap-3 w-full py-3 border border-#E0E7EF rounded-md" style="border-top-left-radius: 0px;">
+      <BaseButton v-for="opt in DIRECTION_OPTIONS" :key="opt.value" variant="card-select" :active="activeMap[opt.value]"
+        @click="store.direction = opt.value as CalcDirection">
         <!-- Icon + label -->
-        <BaseFlex gap="2" class="mb-2">
-          <BaseText
-            variant="icon-glyph"
-            :rawColor="activeMap[opt.value] ? COLORS.ACCENT : COLORS.MUTED"
-          >
-            {{ opt.icon }}
-          </BaseText>
-          <BaseText
-            variant="card-title"
-            :rawColor="activeMap[opt.value] ? COLORS.CONTENT : COLORS.MUTED"
-          >
-            {{ opt.label }}
-          </BaseText>
+        <BaseFlex gap="6" justify="start" align="center" class="mb-2">
+          <Icon v-if="activeMap[opt.value]" class="text-[#91B419]" icon="carbon:circle-filled" width="20" height="20" />
+          <Icon v-else icon="jam:circle" class="text-black" width="20" height="20" />
+          <BaseFlex col align="start" class="max-w-[300px]">
+            <BaseText variant="card-title">
+              {{ opt.label }}
+            </BaseText>
+            <!-- Description -->
+            <BaseText tag="p" variant="footnote" color="MUTED" rawColor="#8B8B8B" class="leading-snug">
+              {{ opt.description }}
+            </BaseText>
+          </BaseFlex>
         </BaseFlex>
 
-        <!-- Description -->
-        <BaseText tag="p" variant="footnote" color="MUTED" class="leading-snug">
-          {{ opt.description }}
-        </BaseText>
+
       </BaseButton>
     </div>
-  </SectionCard>
+  </div>
+
+
 </template>

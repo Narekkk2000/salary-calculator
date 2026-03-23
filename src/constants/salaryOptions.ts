@@ -29,24 +29,27 @@ export const SALARY_PERIOD_OPTIONS: { value: SalaryPeriod; label: string }[] = [
 // ─── Sector options ───────────────────────────────────────────────────────────
 
 export interface SectorOption {
-  value:       EmploymentSector
-  icon:        string
-  label:       string
-  description: string
-  rate:        number  // income tax rate as percentage integer
+  value:        EmploymentSector
+  icon:         string
+  iconSelected: string
+  label:        string
+  description:  string
+  rate:         number
 }
 
 export const SECTOR_OPTIONS: SectorOption[] = [
   {
     value:       'standard',
-    icon:        '◈',
+    icon:        '○',
+    iconSelected: '◉',
     label:       'Ստանդարտ',
     description: 'Ընդհանուր զբաղվածություն',
     rate:        20,
   },
   {
     value:       'it',
-    icon:        '◉',
+    icon:        '○',
+    iconSelected: '◉',
     label:       'ՏՏ ոլորտ',
     description: 'Տեղեկատվական տեխնոլոգիաներ՝ արտոնյալ սակագին',
     rate:        10,
@@ -66,13 +69,13 @@ export const DIRECTION_OPTIONS: DirectionOption[] = [
   {
     value:       'gross2net',
     icon:        '▼',
-    label:       'Համախառն → Ցանկալի',
-    description: 'Մուտքագրեք համախառն աշխատավարձը և տեսեք պահումներից հետո ստացվող ցանկալի գումարը։',
+    label:       'Համախառնից - Զուտ',
+    description: 'Մուտքագրեք աշխատանքային պայմանագրում նշված թիվը, հաշվելու՝ որքան աշխատավարձ կունենաք հարկերից հետո։',
   },
   {
     value:       'net2gross',
     icon:        '▲',
-    label:       'Ցանկալի → Համախառն',
-    description: 'Մուտքագրեք ցանկալի գումարը և գտեք պահանջվող համախառն աշխատավարձը։',
+    label:       'Զուտ աշխատավարձից - Համախառն',
+    description: 'Մուտքագրեք փաստացի ստացված աշխատավարձը, հաշվելու՝ որքան է կազմում Ձեր համախառն աշխատավարձը (ներառյալ հարկերը)։',
   },
 ]

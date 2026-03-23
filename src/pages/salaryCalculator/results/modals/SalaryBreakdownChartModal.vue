@@ -1,7 +1,7 @@
 <template>
   <BaseModal
     :model-value="modelValue"
-    max-width="2xl"
+    max-width="3xl"
     @update:model-value="emit('update:modelValue', $event)"
   >
     <!-- ── Header ──────────────────────────────────────────────────────────── -->
@@ -15,7 +15,7 @@
             class="w-1 h-5 rounded-full"
             style="background: linear-gradient(to bottom, #B9E919, rgba(185,233,25,0.2))"
           />
-          <BaseHeading :level="2" variant="section-title" color="CONTENT">Salary Breakdown</BaseHeading>
+          <BaseHeading :level="2" variant="section-title" color="CONTENT">Մանրամասներ</BaseHeading>
         </div>
 
         <div class="flex items-center gap-3">
@@ -27,12 +27,12 @@
               type="button"
               class="px-2.5 py-1 rounded-md text-xs font-ibm-mono font-semibold transition-all duration-150 cursor-pointer"
               :style="{
-                color:      chartStyle === opt.v ? COLORS.ACCENT : COLORS.MUTED,
+                color:      chartStyle === opt.v ? 'white' : COLORS.MUTED,
                 border:     chartStyle === opt.v ? '1px solid rgba(185,233,25,0.4)' : '1px solid rgba(99,179,237,0.12)',
-                background: chartStyle === opt.v ? 'rgba(185,233,25,0.08)' : 'transparent',
+                background: chartStyle === opt.v ? '#83A126' : 'transparent',
               }"
               @click="chartStyle = opt.v as 'doughnut' | 'bar'"
-            >{{ opt.l }}</button>
+            >{{ opt.v === 'doughnut' ? 'Օղակաձև դիագրամ'  : 'Գծային դիագրամ'}}</button>
           </div>
 
           <!-- Close -->
@@ -104,7 +104,7 @@ function fmtTick(v: number) {
   return `${sym.value}${v}`
 }
 
-const fontConfig = { family: '\'IBM Plex Mono\', monospace' }
+const fontConfig = { family: 'font-arm' }
 
 const doughnutData = computed(() => ({
   labels: props.segments.map((s) => s.label),

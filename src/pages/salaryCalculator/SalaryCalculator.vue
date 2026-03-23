@@ -51,7 +51,7 @@ const salaryStats = computed(() => [
     class="w-full  p-5 sm:p-6 lg:p-8"
     style="box-shadow: rgba(149, 157, 165, 0.2) 0px 12px 30px"
   >
-      <div class="w-full space-y-5">
+      <div class="w-full space-y-5 mb-5">
         <BaseFlex gap="3" class="mb-1">
           <div
             class="w-1.5 h-4 rounded-full"

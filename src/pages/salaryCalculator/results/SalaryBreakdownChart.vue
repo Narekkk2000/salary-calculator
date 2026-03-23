@@ -17,10 +17,10 @@ import { COLORS } from '@/constants/colors'
 import type { SalaryCurrency } from '@/types/salary'
 import { CURRENCY_SYMBOLS } from '@/constants/currency'
 
-import BaseBox     from '@/components/base/layout/BaseBox.vue'
-import BaseFlex    from '@/components/base/layout/BaseFlex.vue'
+import BaseBox from '@/components/base/layout/BaseBox.vue'
+import BaseFlex from '@/components/base/layout/BaseFlex.vue'
 import BaseHeading from '@/components/base/text/BaseHeading.vue'
-import BaseButton  from '@/components/base/ui/BaseButton.vue'
+import BaseButton from '@/components/base/ui/BaseButton.vue'
 
 const SalaryBreakdownChartModal = defineAsyncComponent(
   () => import('@/pages/salaryCalculator/results/modals/SalaryBreakdownChartModal.vue'),
@@ -57,7 +57,7 @@ function fmtTooltip(v: number): string {
 function fmtTick(v: number): string {
   const sym = CURRENCY_SYMBOLS[store.currency]
   if (v >= 1_000_000) return `${sym}${(v / 1_000_000).toFixed(1)}M`
-  if (v >= 1_000)     return `${sym}${(v / 1_000).toFixed(0)}K`
+  if (v >= 1_000) return `${sym}${(v / 1_000).toFixed(0)}K`
   return `${sym}${v}`
 }
 
@@ -66,11 +66,11 @@ function fmtTick(v: number): string {
 const segments = computed(() => {
   const s = store.summary
   return [
-    { label: 'Net Salary',       value: s.netSalary,          color: COLORS.ACCENT    },
-    { label: 'Income Tax',       value: s.deductions.incomeTax,       color: COLORS.SECONDARY },
-    { label: 'Social Payment',   value: s.deductions.socialPayment,   color: COLORS.WARNING   },
-    { label: 'Stamp Duty',       value: s.deductions.stampDuty,       color: COLORS.MUTED     },
-    { label: 'Health Insurance', value: s.deductions.healthInsurance, color: COLORS.DIM       },
+    { label: 'Զուտ աշխատավարձ', value: s.netSalary, color: COLORS.ACCENT },
+    { label: 'Եկամտային հարկ', value: s.deductions.incomeTax, color: COLORS.SECONDARY },
+    { label: 'Սոցիալական վճարներ', value: s.deductions.socialPayment, color: COLORS.WARNING },
+    { label: 'Դրոշմանիշային վճար', value: s.deductions.stampDuty, color: COLORS.MUTED },
+    { label: 'Առողջական ապահովագրություն', value: s.deductions.healthInsurance, color: COLORS.DIM },
   ]
 })
 
@@ -80,11 +80,11 @@ const doughnutData = computed(() => ({
   labels: segments.value.map((s) => s.label),
   datasets: [
     {
-      data:            segments.value.map((s) => s.value),
+      data: segments.value.map((s) => s.value),
       backgroundColor: segments.value.map((s) => s.color),
-      borderColor:     segments.value.map(() => COLORS.SURFACE),
-      borderWidth:     3,
-      hoverOffset:     8,
+      borderColor: segments.value.map(() => COLORS.SURFACE),
+      borderWidth: 3,
+      hoverOffset: 8,
     },
   ],
 }))
@@ -98,25 +98,25 @@ const doughnutOptions = computed(() => ({
     legend: {
       position: 'right' as const,
       labels: {
-        color:  COLORS.MUTED,
-        font:   { family: '\'IBM Plex Mono\', monospace', size: 11, weight: 500 as any },
-        boxWidth:  12,
+        color: COLORS.MUTED,
+        font: { family: '\'IBM Plex Mono\', monospace', size: 11, weight: 500 as any },
+        boxWidth: 12,
         boxHeight: 12,
-        padding:   14,
+        padding: 14,
         generateLabels: (chart: any) => {
-          const data  = chart.data
+          const data = chart.data
           if (!data.labels?.length) return []
           const total = (data.datasets[0].data as number[]).reduce((a: number, b: number) => a + b, 0)
           return data.labels.map((label: string, i: number) => {
             const value = data.datasets[0].data[i] as number
-            const pct   = total > 0 ? ((value / total) * 100).toFixed(1) : '0.0'
+            const pct = total > 0 ? ((value / total) * 100).toFixed(1) : '0.0'
             return {
-              text:        `${label}  ${pct}%`,
-              fillStyle:   data.datasets[0].backgroundColor[i],
+              text: `${label}  ${pct}%`,
+              fillStyle: data.datasets[0].backgroundColor[i],
               strokeStyle: data.datasets[0].borderColor[i],
-              lineWidth:   1,
-              hidden:      false,
-              index:       i,
+              lineWidth: 1,
+              hidden: false,
+              index: i,
             }
           })
         },
@@ -124,16 +124,16 @@ const doughnutOptions = computed(() => ({
     },
     tooltip: {
       backgroundColor: COLORS.SURFACE,
-      borderColor:     'rgba(99,179,237,0.2)',
-      borderWidth:     1,
-      titleColor:      COLORS.MUTED,
-      bodyColor:       COLORS.CONTENT,
-      titleFont:       { family: '\'IBM Plex Mono\', monospace', size: 10 },
-      bodyFont:        { family: '\'IBM Plex Mono\', monospace', size: 11 },
+      borderColor: 'rgba(99,179,237,0.2)',
+      borderWidth: 1,
+      titleColor: COLORS.MUTED,
+      bodyColor: COLORS.CONTENT,
+      titleFont: { family: '\'IBM Plex Mono\', monospace', size: 10 },
+      bodyFont: { family: '\'IBM Plex Mono\', monospace', size: 11 },
       callbacks: {
         label: (ctx: any) => {
           const total = (ctx.dataset.data as number[]).reduce((a: number, b: number) => a + b, 0)
-          const pct   = total > 0 ? ((ctx.raw / total) * 100).toFixed(1) : '0.0'
+          const pct = total > 0 ? ((ctx.raw / total) * 100).toFixed(1) : '0.0'
           return ` ${ctx.label}: ${fmtTooltip(ctx.raw)}  (${pct}%)`
         },
       },
@@ -147,11 +147,11 @@ const barData = computed(() => ({
   labels: segments.value.map((s) => s.label),
   datasets: [
     {
-      label:           'Amount',
-      data:            segments.value.map((s) => s.value),
+      label: 'Amount',
+      data: segments.value.map((s) => s.value),
       backgroundColor: segments.value.map((s) => s.color),
-      borderRadius:    4,
-      borderSkipped:   false,
+      borderRadius: 4,
+      borderSkipped: false,
     },
   ],
 }))
@@ -165,12 +165,12 @@ const barOptions = computed(() => ({
     legend: { display: false },
     tooltip: {
       backgroundColor: COLORS.SURFACE,
-      borderColor:     'rgba(99,179,237,0.2)',
-      borderWidth:     1,
-      titleColor:      COLORS.MUTED,
-      bodyColor:       COLORS.CONTENT,
-      titleFont:       { family: '\'IBM Plex Mono\', monospace', size: 10 },
-      bodyFont:        { family: '\'IBM Plex Mono\', monospace', size: 11 },
+      borderColor: 'rgba(99,179,237,0.2)',
+      borderWidth: 1,
+      titleColor: COLORS.MUTED,
+      bodyColor: COLORS.CONTENT,
+      titleFont: { family: '\'IBM Plex Mono\', monospace', size: 10 },
+      bodyFont: { family: '\'IBM Plex Mono\', monospace', size: 11 },
       callbacks: {
         label: (ctx: any) => ` ${fmtTooltip(ctx.raw)}`,
       },
@@ -178,19 +178,19 @@ const barOptions = computed(() => ({
   },
   scales: {
     x: {
-      grid:   { color: 'rgba(255,255,255,0.04)' },
-      ticks:  {
+      grid: { color: 'rgba(255,255,255,0.04)' },
+      ticks: {
         color: COLORS.DIM,
-        font:  { family: '\'IBM Plex Mono\', monospace', size: 9 },
+        font: { family: '\'IBM Plex Mono\', monospace', size: 9 },
         callback: (v: any) => fmtTick(v),
       },
       border: { display: false },
     },
     y: {
-      grid:   { display: false },
-      ticks:  {
+      grid: { display: false },
+      ticks: {
         color: COLORS.MUTED,
-        font:  { family: '\'IBM Plex Mono\', monospace', size: 10 },
+        font: { family: '\'IBM Plex Mono\', monospace', size: 10 },
       },
       border: { display: false },
     },
@@ -201,11 +201,10 @@ const hasData = computed(() => store.summary.grossSalary > 0)
 </script>
 
 <template>
-  <div class="w-full flex flex-col items-start items-center gap-3 bg-gray-50 p-2 rounded-sm">
-
-      <BaseHeading :level="3" variant="section-title" color="MUTED">
-        Աշխատավարձի բացվածք
-      </BaseHeading>
+  <div class="w-full border px-1,5 border-[#E8EEF6] flex flex-col items-start items-center gap-3 bg-[#F7F8FA] p-2 rounded-sm">
+    <BaseText style="font-weight: 600;" variant="sub-hint">
+      Մանրամասներ
+    </BaseText>
 
     <!-- Expand button -->
     <!-- <button
@@ -225,11 +224,11 @@ const hasData = computed(() => store.summary.grossSalary > 0)
         <line x1="3" y1="21" x2="10" y2="14" />
       </svg>
     </button> -->
-    <button @click="handleExpandClick" class="font-arm bg-black text-white rounded-sm px-2 py-1">
+    <button @click="handleExpandClick" class="font-arm bg-[#092C40] text-white rounded-sm px-2 py-1">
       Բացել
     </button>
 
-  <!-- <BaseBox overflow>
+    <!-- <BaseBox overflow>
     <BaseFlex
       justify="between"
       align="center"
@@ -297,13 +296,8 @@ const hasData = computed(() => store.summary.grossSalary > 0)
     </div>
   </BaseBox> -->
 
-  <SalaryBreakdownChartModal
-    v-if="hasOpenedModal"
-    v-model="isOpen"
-    :segments="segments"
-    :currency="store.currency"
-    :initial-style="chartStyle"
-  />
+    <SalaryBreakdownChartModal v-if="hasOpenedModal" v-model="isOpen" :segments="segments" :currency="store.currency"
+      :initial-style="chartStyle" />
 
   </div>
 </template>

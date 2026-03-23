@@ -62,7 +62,7 @@ const variantClass = computed<string>(() => {
     'kpi-label-modal': 'text-md uppercase tracking-widest truncate font-arm',
     'kpi-icon-modal': 'text-md leading-none',
     'kpi-value': 'text-base font-semibold leading-tight truncate font-arm',
-    'kpi-value-big': 'text-xl font-bold leading-tight truncate font-arm',
+    'kpi-value-big': 'text-xl  leading-tight truncate font-arm',
     'card-title': 'text-xl md:text-sm font-bold font-arm',
     'icon-glyph': 'text-2xl leading-none',
   }

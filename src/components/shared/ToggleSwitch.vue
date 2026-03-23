@@ -40,7 +40,7 @@ const emit = defineEmits<{
 </script>
 
 <template>
-  <div class="inline-flex gap-[14px] p-[2px] rounded-sm">
+  <div class="inline-flex gap-[14px] p-[2px] rounded-xs">
     <button
         v-for="option in options"
         :key="option.value"
