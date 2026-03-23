@@ -106,7 +106,7 @@ const rows = computed<DeductionRow[]>(() => {
       color: '#F3724B',
     },
     {
-      label: 'րոշմանիշային վճար',
+      label: 'Դրոշմանիշային վճար',
       amount: d.stampDuty,
       pctStr: 'Ամրագրված',
       isFixed: true,
@@ -193,7 +193,7 @@ const rows = computed<DeductionRow[]>(() => {
           <div class="flex items-center justify-between py-2.5">
             <BaseFlex gap="2" align="center">
               <BaseText tag="span" variant="kpi-label" color="CONTENT">
-                Ընդհանուր պահումներ
+                Պահումներ
               </BaseText>
             </BaseFlex>
             <BaseFlex gap="3" align="center">
