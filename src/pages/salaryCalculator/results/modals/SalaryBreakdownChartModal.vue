@@ -7,7 +7,7 @@
     <!-- ── Header ──────────────────────────────────────────────────────────── -->
     <template #header="{ close }">
       <div
-        class="flex items-center justify-between px-6 py-4 flex-shrink-0"
+        class="flex flex-col md:flex-row items-start md:items-center justify-between px-6 gap-2 md:gap-0 py-4 flex-shrink-0"
         style="border-bottom: 1px solid rgba(99,179,237,0.1)"
       >
         <div class="flex items-center gap-3">
@@ -20,7 +20,7 @@
 
         <div class="flex items-center gap-3">
           <!-- Chart style toggle -->
-          <div class="flex items-center gap-1.5">
+          <div class="flex  items-center gap-1.5">
             <button
               v-for="opt in [{ v: 'doughnut', l: 'Doughnut' }, { v: 'bar', l: 'Bar' }]"
               :key="opt.v"
@@ -66,7 +66,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { onMounted, onUnmounted, ref, computed } from 'vue'
 import { Bar, Doughnut } from 'vue-chartjs'
 import {
   Chart as ChartJS, Title, Tooltip, Legend,
@@ -95,6 +95,12 @@ const chartStyle = ref<'doughnut' | 'bar'>(props.initialStyle)
 const hasData    = computed(() => props.segments.some((s) => s.value > 0))
 const sym        = computed(() => CURRENCY_SYMBOLS[props.currency as keyof typeof CURRENCY_SYMBOLS] ?? props.currency)
 
+const isSmallScreen = ref(window.innerWidth < 768)
+
+const onResize = () => { isSmallScreen.value = window.innerWidth < 768 }
+onMounted(() => window.addEventListener('resize', onResize))
+onUnmounted(() => window.removeEventListener('resize', onResize))
+
 function fmtT(v: number) {
   return `${sym.value}${new Intl.NumberFormat('en-US', { maximumFractionDigits: 0 }).format(v)}`
 }
@@ -120,7 +126,7 @@ const doughnutOptions = computed(() => ({
   responsive: true, maintainAspectRatio: false, animation: { duration: 300 }, cutout: '60%',
   plugins: {
     legend: {
-      position: 'right' as const,
+      position: (isSmallScreen.value ? 'bottom' : 'right') as 'bottom' | 'right',
       labels: {
         color: COLORS.MUTED, font: { ...fontConfig, size: 12 }, boxWidth: 14, boxHeight: 14, padding: 18,
         generateLabels: (chart: any) => {

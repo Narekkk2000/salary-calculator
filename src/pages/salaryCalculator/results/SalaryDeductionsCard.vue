@@ -157,7 +157,7 @@ const rows = computed<DeductionRow[]>(() => {
       <div>
         <!-- Header -->
         <BaseText class="mt-2 mb-2" variant="sub-hint" color="CONTENT">
-          Պահումների բացվածք
+          Պահումներ
         </BaseText>
         <div class="w-full border border-[#E8EEF6] rounded-[6px] p-5 flex flex-col gap-4 transition-all duration-200"
           style="background: #F7F8FA; border-top-left-radius: 0px;">
