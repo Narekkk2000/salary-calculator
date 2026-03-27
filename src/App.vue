@@ -4,7 +4,7 @@ import SalaryCalculator from './pages/salaryCalculator/SalaryCalculator.vue'
 
 <template>
   <div class="bg-app-bg min-h-screen flex justify-center text-app-content">
-    <main class="flex justify-center py-4 my-auto w-[500px] relative z-0">
+    <main class="flex justify-center relative z-0">
       <SalaryCalculator />
     </main>
   </div>
