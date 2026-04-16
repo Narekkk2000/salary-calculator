@@ -53,8 +53,8 @@ function onPeriodChange(newPeriod: string) {
 
     <!-- ── Amount input + currency ────────────────────────────────────────── -->
     <BaseFlex col align="stretch" class="w-full">
-      <BaseFlex justify="between">
-        <BaseText class="ml-2  max-w-36" variant="sub-hint" color="CONTENT">
+      <BaseFlex justify="between" wrap gap="3">
+        <BaseText class="ml-2 max-w-[300px] md:max-w-34" variant="sub-hint" color="CONTENT">
           {{ inputLabel }}
         </BaseText>
         <ToggleSwitch class="self-end mb-3" :options="SALARY_CURRENCY_OPTIONS" :model-value="store.currency"
@@ -70,17 +70,17 @@ function onPeriodChange(newPeriod: string) {
     </BaseFlex>
 
     <!-- Quick-set presets -->
-    <BaseFlex gap="2" wrap class="mt-2 self-end bg-[#F3F8FE] p-1 rounded-sm">
-      <BaseButton v-for="preset in presets" :key="preset" variant="preset" :active="isPresetActive(preset)"
+    <div class="w-full mt-2 self-end bg-[#F3F8FE] p-1 rounded-sm grid grid-cols-3 sm:flex sm:flex-wrap gap-2">
+      <BaseButton class="flex justify-center" v-for="preset in presets" :key="preset" variant="preset" :active="isPresetActive(preset)"
         @click="selectPreset(preset)">
         {{ formatPresetLabel(preset) }}
       </BaseButton>
-    </BaseFlex>
+    </div>
 
     <BaseDivider />
 
     <!-- ── Period toggle ──────────────────────────────────────────────────── -->
-    <BaseFlex align="center" justify="between" gap="3" class="w-full">
+    <BaseFlex align="start" justify="between" gap="3" class="w-full flex-col md:flex-row">
       <BaseText variant="sub-hint" color="CONTENT">Ժամանակահատվածը՝</BaseText>
       <ToggleSwitch :options="SALARY_PERIOD_OPTIONS" :model-value="store.period" @update:model-value="onPeriodChange" />
     </BaseFlex>

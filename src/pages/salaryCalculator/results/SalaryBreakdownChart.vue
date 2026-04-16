@@ -201,7 +201,7 @@ const hasData = computed(() => store.summary.grossSalary > 0)
 </script>
 
 <template>
-  <div class="w-full border px-1,5 border-[#E8EEF6] flex flex-col items-start items-center gap-3 bg-[#F7F8FA] p-2 rounded-sm">
+  <div style="padding-inline: 20px;" class="w-full border px-1,5 border-[#E8EEF6] flex justify-between items-center gap-3 bg-[#F7F8FA] p-2 rounded-sm">
     <BaseText style="font-weight: 600;" variant="sub-hint">
       Մանրամասներ
     </BaseText>
@@ -224,7 +224,7 @@ const hasData = computed(() => store.summary.grossSalary > 0)
         <line x1="3" y1="21" x2="10" y2="14" />
       </svg>
     </button> -->
-    <button @click="handleExpandClick" class="font-arm bg-[#092C40] text-white rounded-sm px-2 py-1">
+    <button @click="handleExpandClick" class="font-arm bg-[#092C40] text-white rounded-sm px-4 py-1">
       Բացել
     </button>
 

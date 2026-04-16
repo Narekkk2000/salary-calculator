@@ -136,7 +136,7 @@ const rows = computed<DeductionRow[]>(() => {
           :style="index < cards.length - 1 ? 'border-bottom: 1px solid rgba(255,255,255,0.08)' : ''">
           <BaseFlex gap="8" align="center" justify="between">
             <!-- Icon + label -->
-            <BaseFlex gap="1.5">
+            <BaseFlex gap="1.5" class="min-w-0">
               <BaseText tag="span" variant="kpi-label" rawColor="black">
                 {{ card.label }}
               </BaseText>
@@ -166,7 +166,7 @@ const rows = computed<DeductionRow[]>(() => {
           <div v-for="row in rows" :key="row.label" class="flex items-center justify-between py-2.5"
             style="border-bottom: 1px solid rgba(99,179,237,0.05)">
             <!-- Left: colour dot + label -->
-            <BaseFlex gap="2" align="center">
+            <BaseFlex gap="2" align="center" class="min-w-0">
               <BaseText tag="span" variant="kpi-label" color="CONTENT">
                 {{ row.label }}
               </BaseText>
